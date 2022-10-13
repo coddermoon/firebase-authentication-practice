@@ -1,31 +1,32 @@
 
 import './App.css';
 import app from './firebase/firebase.init';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { useState } from 'react';
 
 
 
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
+const githubProvider = new GithubAuthProvider()
+const facebookProvider = new FacebookAuthProvider()
 
 
 function App() {
   const [user,setUser]= useState({})
 const {uid,displayName,email,photoURL}= user
 
-  // sign in  handleing
-
-const handleWithGoogle = ()=>{
-  signInWithPopup(auth,googleProvider)
+ 
+const handleSignIn = (provider)=>{
+  signInWithPopup(auth,provider)
   .then(result=>{
     const user = result.user
     setUser(user)
   })
-  .catch(error=>{
-    console.error(error)
-  })
+  .catch(error=> console.error(error))
 }
+
+
 
 // signout function
 
@@ -49,9 +50,9 @@ const signOutDevice = ()=>{
    </div>
     :
     <div className="signin">
-     <button onClick={handleWithGoogle}>Sign In Google</button>
-      <button>Sign In Facebook</button>
-      <button>Sign In GitHub</button>
+     <button onClick={()=>handleSignIn(googleProvider)}>Sign In Google</button>
+      <button onClick={()=>handleSignIn(facebookProvider)}>Sign In Facebook</button>
+      <button onClick={()=>handleSignIn(githubProvider)}>Sign In GitHub</button>
       <button>Sign In Twitter</button>
      </div>
     
