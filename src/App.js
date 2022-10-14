@@ -2,7 +2,10 @@
 import './App.css';
 import app from './firebase/firebase.init';
 import { FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import {FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
+
 import { useState } from 'react';
+
 
 
 
@@ -23,7 +26,7 @@ const handleSignIn = (provider)=>{
     const user = result.user
     setUser(user)
   })
-  .catch(error=> console.error(error))
+  .catch(error=> console.error("error",error))
 }
 
 
@@ -50,10 +53,20 @@ const signOutDevice = ()=>{
    </div>
     :
     <div className="signin">
-     <button onClick={()=>handleSignIn(googleProvider)}>Sign In Google</button>
-      <button onClick={()=>handleSignIn(facebookProvider)}>Sign In Facebook</button>
-      <button onClick={()=>handleSignIn(githubProvider)}>Sign In GitHub</button>
-      <button>Sign In Twitter</button>
+      <div>
+        <form >
+          <input type="email" name="email"  placeholder='email'/><br />
+          <input type="password" name="pass" placeholder='password' /><br />
+          <input type="submit" value="Register now" />
+        </form>
+      </div>
+      <h3>Alternative Options</h3>
+     <button onClick={()=>handleSignIn(googleProvider)}>
+     <FaGoogle/> 
+      </button>
+      <button onClick={()=>handleSignIn(facebookProvider)}><FaFacebook/></button>
+      <button onClick={()=>handleSignIn(githubProvider)}><FaGithub/></button>
+      <button><FaTwitter/></button>
      </div>
     
     }

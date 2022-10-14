@@ -2,7 +2,7 @@
   text-align: center;
 }
 
- button{
+input, button{
   margin: 20px;
   outline: none;
   border: none;
@@ -10,4 +10,7 @@
   font-size: 1.2rem;
   font-weight: 500;
   cursor: pointer;
+}
+input{
+  outline: 1px solid gray;
 }
